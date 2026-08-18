@@ -1,0 +1,42 @@
+<div class="container mt-4">
+      <div class="d-flex justify-content-betweenaling-items-center mb-3">
+        <h2>EMPLEADOS</h2>
+      </div>
+
+      <a href="/empleados/registro" class="btn btn-primary mb-3">Registrar Empleado</a>
+
+  <div class="mt-2">
+    <table class="table table-bordered table-hover table-stripped align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th>#</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Profesion</th>
+          <th>Salario</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+    <tbody>
+        @for(empleado of empleados(); track empleado._id){
+      <tr>
+          <td>{{$index + 1}}</td>
+          <td>{{ empleado.nombre }}</td>
+          <td>{{ empleado.apellido }}</td>
+          <td>{{ empleado.profesion }}</td>
+          <td>{{ empleado.salario}}</td>
+          <td>
+              <a href="/empleados/editar/{{ empleado._id }}" class="btn btn-warning btn-sm me-2">
+                Editar
+              </a>
+              <button class="btn btn-danger btn-sm me-2" (click)="eliminarEmpleado(empleado._id)">
+                Eliminar
+              </button>
+            </td>
+        </tr>
+          }
+    </tbody>
+
+    </table>
+  </div>
+</div>

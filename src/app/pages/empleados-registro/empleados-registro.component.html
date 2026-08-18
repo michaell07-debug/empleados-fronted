@@ -1,0 +1,36 @@
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header">
+      <h2>{{ titulo }}</h2>
+    </div>
+    <div class="card-body">
+      <h3>{{ id ? 'Formulario de Edición de Empleados' : 'Formulario de Registro de Empleados' }}</h3>
+      
+      <form [formGroup]="empleadoFormulario" (ngSubmit)="guardar()">
+        <div class="mb-3">
+          <label class="form-label">Nombre:</label>
+          <input type="text" class="form-control" formControlName="nombre">
+        </div>
+        
+        <div class="mb-3">
+          <label class="form-label">Apellido:</label>
+          <input type="text" class="form-control" formControlName="apellido">
+        </div>
+        
+        <div class="mb-3">
+          <label class="form-label">Profesion:</label>
+          <input type="text" class="form-control" formControlName="profesion">
+        </div>
+        
+        <div class="mb-3">
+          <label class="form-label">Salario:</label>
+          <input type="number" class="form-control" formControlName="salario">
+        </div>
+        
+        <button type="submit" class="btn btn-primary">
+          {{ id ? 'Actualizar' : 'Guardar' }}
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
