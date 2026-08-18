@@ -1,12 +1,15 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { EmpleadosService } from '../../services/empleados/empleados_service';
 import { EmpleadosModelLista } from '../../models/empleados/empleados-lista_model';
 
 @Component({
   selector: 'app-empleados',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule, RouterLink],
   templateUrl: './empleados.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EmpleadosComponent {
   private empleadosService = inject(EmpleadosService);

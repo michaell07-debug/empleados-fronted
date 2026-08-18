@@ -1,42 +1,55 @@
 <div class="container mt-4">
-      <div class="d-flex justify-content-betweenaling-items-center mb-3">
-        <h2>EMPLEADOS</h2>
-      </div>
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>EMPLEADOS</h2>
+  </div>
 
-      <a href="/empleados/registro" class="btn btn-primary mb-3">Registrar Empleado</a>
+  <a routerLink="/empleados/registro" class="btn btn-primary mb-3">Registrar Empleado</a>
 
   <div class="mt-2">
-    <table class="table table-bordered table-hover table-stripped align-middle">
+    <table class="table table-bordered table-hover table-striped align-middle">
       <thead class="table-dark">
         <tr>
           <th>#</th>
           <th>Nombre</th>
           <th>Apellido</th>
-          <th>Profesion</th>
+          <th>Profesión</th>
           <th>Salario</th>
+          <th>Fecha Creación</th>
+          <th>Fecha Actualización</th>
           <th>Acciones</th>
         </tr>
       </thead>
-    <tbody>
-        @for(empleado of empleados(); track empleado._id){
-      <tr>
-          <td>{{$index + 1}}</td>
-          <td>{{ empleado.nombre }}</td>
-          <td>{{ empleado.apellido }}</td>
-          <td>{{ empleado.profesion }}</td>
-          <td>{{ empleado.salario}}</td>
-          <td>
-              <a href="/empleados/editar/{{ empleado._id }}" class="btn btn-warning btn-sm me-2">
+      <tbody>
+        @for (empleado of empleados(); track empleado._id) {
+          <tr>
+            <td>{{ $index + 1 }}</td>
+            <td>{{ empleado.nombre | titlecase }}</td>
+            <td>{{ empleado.apellido | titlecase }}</td>
+            <td>{{ empleado.profesion | titlecase }}</td>
+            <td>
+              <span class="badge" [ngClass]="empleado.salario >= 1000 ? 'bg-success' : 'bg-secondary'">
+                {{ empleado.salario | currency:'USD':'symbol':'1.2-2' }}
+              </span>
+            </td>
+            <td>{{ empleado.createdAt | date:'dd/MM/yyyy' }}</td>
+            <td>{{ empleado.updatedAt | date:'dd/MM/yyyy, h:mm a' }}</td>
+            <td>
+              <button class="btn btn-warning btn-sm me-2" (click)="editarEmpleado(empleado._id)">
                 Editar
-              </a>
-              <button class="btn btn-danger btn-sm me-2" (click)="eliminarEmpleado(empleado._id)">
+              </button>
+              <button class="btn btn-danger btn-sm" (click)="eliminarEmpleado(empleado._id)">
                 Eliminar
               </button>
             </td>
-        </tr>
-          }
-    </tbody>
-
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="8" class="text-center text-muted py-3">
+              No hay empleados registrados en la base de datos.
+            </td>
+          </tr>
+        }
+      </tbody>
     </table>
   </div>
 </div>
